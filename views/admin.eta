@@ -2,17 +2,44 @@
 
 <body>
   <main class="container mt-2">
-    <% /* <div class="table"> */ %>
     <div class="d-flex justify-content-between align-items-center">
       <a href="/admin/start" class="btn btn-primary">Start</a>
       <button class="btn btn-danger" onclick="confirm('Are you sure you want to reset?') ? window.location.href+='/reset' : null">Reset</button>
       <button class="btn btn-primary" onclick="window.location.reload()"><i class="bi bi-arrow-clockwise"></i></button>
     </div>
     <div>
-      <%~ include("./partials/table.eta", {table: it.state.words})%>
-      <pre><code><%= JSON.stringify(it.state, null, 2) %></code></pre>
+      <div class='mt-2'>
+        <%~ include("./partials/table.eta", {table: it.words})%>
+      </div>
+      <div class='mt-2'>
+        <table class="table table-striped">
+          <tbody>
+            <% it.players.forEach(function(row) { %>
+            <tr>
+              <% 
+                const player = row[1] 
+                const chameleon = player.isChameleon
+              %>
+              <td><%= player.name %></td>
+              <td>
+                <% if(chameleon){ %>
+                <i class="bi bi-incognito me-2"></i>
+                <%}%>
+              </td>
+            </tr>
+            <% }) %>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Total player count</td>
+              <td><%= it.players.length %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <% /* </div> */ %>
   </main>
 </body>
 

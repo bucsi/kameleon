@@ -9,7 +9,7 @@ export function admin(ctx: RouterContext<"/admin">) {
     const players = Array.from(game.players.entries());
     const isPlaying = game.isPlaying;
 
-    ctx.response.body = Eta.render("admin.eta", { state: { words, players, isPlaying } });
+    ctx.response.body = Eta.render("admin.eta", { words, players, isPlaying });
 }
 
 export function adminStart(ctx: RouterContext<"/admin/start">) {
