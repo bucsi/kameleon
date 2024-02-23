@@ -11,6 +11,7 @@ export function admin(ctx: RouterContext<"/admin">) {
     const game = Game.getInstance();
     const { words } = game.board;
     const players = Array.from(game.players.entries());
+    const isPlaying = game.isPlaying;
 
     ctx.response.body = Eta.render("admin.eta", { state: { words, players } });
 }
