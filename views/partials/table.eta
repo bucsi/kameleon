@@ -1,0 +1,11 @@
+<table class="table table-striped">
+    <tbody>
+        <% it.table.forEach(function(row) { %>
+            <tr>
+                <% row.forEach(function(word) { %>
+                    <td><%= word %></td>
+                <% }) %>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

@@ -24,17 +24,7 @@
                         <div>A titkos szó: <%= it.field %></div>
                     </div>
                 <% } %>
-                <table class="table table-striped">
-                    <tbody>
-                        <% it.words.forEach(function(row) { %>
-                            <tr>
-                                <% row.forEach(function(word) { %>
-                                    <td><%= word %></td>
-                                <% }) %>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
+                <%~ include("./partials/table.eta", {table: it.words})%>
             <% } %>
         </div>
     </main>
