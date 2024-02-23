@@ -1,0 +1,44 @@
+name: Deno CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up repo
+        uses: actions/checkout@v2
+
+      - name: Set up Deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.x
+
+      - name: Compile project
+        run: deno compile --allow-net --allow-read main.ts
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          body: |
+            Commit message: ${{ github.event.head_commit.message }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./kameleon
+          asset_name: kameleon
+          asset_content_type: application/octet-stream
