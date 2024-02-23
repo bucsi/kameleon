@@ -1,6 +1,8 @@
 <%~ include("./partials/head.eta", {title: "Admin"})%>
 <body>
     <main>
+        <a href="/admin/start" class="btn btn-primary">Start</a>
+        <button class="btn btn-danger" onclick="confirm('Are you sure you want to reset?') ? window.location.href+='/reset' : null">Reset</button>
         <pre><code><%= JSON.stringify(it.state, null, 2) %></code></pre>
     </main>
 </body>
