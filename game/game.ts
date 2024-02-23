@@ -6,7 +6,7 @@ import { Status } from "./status.ts";
 import { boards } from "./boards.ts";
 
 export class Game {
-    private static instance: Game;
+    private static instance: Game | null;
 
     public readonly players: Map<string, Player>;
     private _board: Board;
@@ -18,6 +18,11 @@ export class Game {
         this._status = Status.PREPARING;
 
         log.debug("selected field", { field: this._board.field });
+    }
+
+    public static reset() {
+        Game.instance = null;
+        Game.getInstance();
     }
 
     public static getInstance() {

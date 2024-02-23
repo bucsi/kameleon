@@ -18,8 +18,9 @@ export function playerView(ctx: RouterContext<"/play/:id">) {
     const game = Game.getInstance();
     const id = ctx.params?.id;
     if (!game.players.has(id)) {
-        ctx.response.body = { success: false, error: "Player not found!" };
         log.warn("no such player", { id });
+
+        ctx.response.redirect(`/`);
         return;
     }
 

@@ -2,7 +2,7 @@ import { Application, Router } from "https://deno.land/x/oak@v13.2.5/mod.ts";
 
 import { Game } from "./game/game.ts";
 import { log } from "./util/log.ts";
-import { admin, adminStart } from "./controllers/admin.ts";
+import { admin, adminReset, adminStart } from "./controllers/admin.ts";
 import { index } from "./controllers/index.ts";
 import { playerView, registerPlayer } from "./controllers/play.ts";
 
@@ -11,6 +11,7 @@ router
     .get("/", index)
     .get("/admin", admin)
     .get("/admin/start", adminStart)
+    .get("/admin/reset", adminReset)
     .get("/play", registerPlayer)
     .get("/play/:id", playerView);
 

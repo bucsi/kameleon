@@ -19,3 +19,9 @@ export function adminStart(ctx: RouterContext<"/admin/start">) {
 
     ctx.response.redirect("/admin");
 }
+
+export function adminReset(ctx: RouterContext<"/admin/reset">) {
+    Game.reset();
+
+    ctx.response.redirect("/admin");
+}
