@@ -8,12 +8,21 @@
         </div>
         <br>
             <% if (!it.isPlaying) { %>
-                <p class="alert alert-warning">A játék még nem kezdődött el.</p>
+                <div class="alert alert-primary d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                    <div>A játék még nem kezdődött el.</div>
+                </div>
             <% } else { %>
                 <% if (it.isChameleon) { %>
-                    <p class="alert alert-success">Te vagy a kaméleon!!</p>
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <i class="bi bi-incognito me-2"></i>
+                        <div>Te vagy a kaméleon!!</div>
+                    </div>
                 <% } else { %>
-                    <p class="alert alert-info">A titkos szó: <%= it.field %></p>
+                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                        <i class="bi bi-search me-2"></i>
+                        <div>A titkos szó: <%= it.field %></div>
+                    </div>
                 <% } %>
                 <table class="table table-striped">
                     <tbody>
