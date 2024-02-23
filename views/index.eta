@@ -1,0 +1,7 @@
+<%~ include("./partials/head.eta", {title: "Admin"})%>
+<body>
+    <main>
+        <a href="/play">Csatlakozás a játékhoz</a>
+    </main>
+</body>
+</html>

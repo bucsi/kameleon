@@ -1,0 +1,7 @@
+<%~ include("./partials/head.eta", {title: "Admin"})%>
+<body>
+    <main>
+        <pre><code><%= JSON.stringify(it.state, null, 2) %></code></pre>
+    </main>
+</body>
+</html>
