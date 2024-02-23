@@ -1,28 +1,29 @@
-<%~ include("./partials/head.eta", {title: "Admin"})%>
+<%~ include("./partials/head.eta", {title: "Play"})%>
 <body>
-    <main>
-        <p>Player id: <%=it.id%></p>
-        <% if(!it.isPlaying){%>
-            <p>A jatek meg nem kezdodott el.</p>
-        <% }else{%>
-            
-            <% if(it.isChameleon){%>
-                <p>Te vagy a kameleon!!</p>
-            <% }else{%>
-                <p>A titkos szo: <%=it.field%></p>
+    <main class="container mt-5">
+        <div class="table-responsive">
+            <p>Player id: <%= it.id %></p>
+            <% if (!it.isPlaying) { %>
+                <p class="alert alert-warning">A játék még nem kezdődött el.</p>
+            <% } else { %>
+                <% if (it.isChameleon) { %>
+                    <p class="alert alert-success">Te vagy a kaméleon!!</p>
+                <% } else { %>
+                    <p class="alert alert-info">A titkos szó: <%= it.field %></p>
+                <% } %>
+                <table class="table table-striped">
+                    <tbody>
+                        <% it.words.forEach(function(row) { %>
+                            <tr>
+                                <% row.forEach(function(word) { %>
+                                    <td><%= word %></td>
+                                <% }) %>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
             <% } %>
-            <table>
-                <%it.words.forEach(function(row){%>
-                    <tr>
-                        <%row.forEach(function(word){%>
-                            <td>
-                                <%= word %>
-                            </td>
-                        <%})%>
-                    </tr>
-                <%})%>
-            </table>
-        <% } %>
+        </div>
     </main>
 </body>
 </html>

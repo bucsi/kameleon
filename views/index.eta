@@ -1,7 +1,7 @@
-<%~ include("./partials/head.eta", {title: "Admin"})%>
+<%~ include("./partials/head.eta")%>
 <body>
-    <main>
-        <a href="/play">Csatlakozás a játékhoz</a>
+    <main class="d-flex justify-content-center align-items-center vh-100">
+        <a href="/play" class="btn btn-primary">Csatlakozás a játékhoz</a>
     </main>
 </body>
 </html>
