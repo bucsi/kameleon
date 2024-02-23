@@ -37,6 +37,10 @@ export class Game {
         return Array.from(this.players.entries()).map(el => el[0]);
     }
 
+    get isPlaying() {
+        return this.status === Status.PLAYING;
+    }
+
     public addPlayer(name: string) {
         this.players.set(name, new Player(name));
     }

@@ -1,0 +1,28 @@
+<%~ include("./partials/head.eta", {title: "Admin"})%>
+<body>
+    <main>
+        <p>Player id: <%=it.id%></p>
+        <% if(!it.isPlaying){%>
+            <p>A jatek meg nem kezdodott el.</p>
+        <% }else{%>
+            
+            <% if(it.isChameleon){%>
+                <p>Te vagy a kameleon!!</p>
+            <% }else{%>
+                <p>A titkos szo: <%=it.field%></p>
+            <% } %>
+            <table>
+                <%it.words.forEach(function(row){%>
+                    <tr>
+                        <%row.forEach(function(word){%>
+                            <td>
+                                <%= word %>
+                            </td>
+                        <%})%>
+                    </tr>
+                <%})%>
+            </table>
+        <% } %>
+    </main>
+</body>
+</html>

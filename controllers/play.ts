@@ -16,10 +16,15 @@ export function registerPlayer(ctx: RouterContext<"/play">) {
 
 export function playerView(ctx: RouterContext<"/play/:id">) {
     const game = Game.getInstance();
-    if (!game.players.has(ctx.params?.id)) {
+    const id = ctx.params?.id;
+    if (!game.players.has(id)) {
         ctx.response.body = { success: false, error: "Player not found!" };
-        log.warn("no such player", { id: ctx.params?.id });
+        log.warn("no such player", { id });
         return;
     }
-    ctx.response.body = `player ${ctx.params.id}`;
+
+    const isPlaying = game.isPlaying;
+    const { words, field } = game.board;
+    const isChameleon = game.players.get(id)?.isChameleon;
+    ctx.response.body = Eta.render("player.eta", { words, id, isChameleon, field, isPlaying });
 }
