@@ -3,25 +3,21 @@ import { log } from "../util/log.ts";
 import { Board } from "./board.ts";
 import { Player } from "./player.ts";
 import { Status } from "./status.ts";
+import { boards } from "./boards.ts";
 
 export class Game {
     private static instance: Game;
 
     public readonly players: Map<string, Player>;
-    public readonly board: Board;
-    private status = Status.PREPARING;
+    private _board: Board;
+    private _status = Status.PREPARING;
 
     private constructor() {
         this.players = new Map<string, Player>();
-        this.board = new Board([
-            ["Pizza", "Krumpli", "Hal", "Sütemény"],
-            ["Tészta", "Saláta", "Leves", "Kenyér"],
-            ["Tojás", "Sajt", "Gyümölcs", "Virsli"],
-            ["Sült Csrike", "Jégkrém", "Csokoládé", "Marhahús"],
-        ]);
-        this.status = Status.PREPARING;
+        this._board = new Board([[]]);
+        this._status = Status.PREPARING;
 
-        log.debug("selected field", { field: this.board.field });
+        log.debug("selected field", { field: this._board.field });
     }
 
     public static getInstance() {
@@ -35,11 +31,16 @@ export class Game {
     }
 
     public startNewGame() {
+        this._board = new Board(sample(boards) || [[]]);
         this.players.forEach(p => p.clearChameleon());
         const chameleon = sample(this.playerIds) ?? "err: no such player";
         log.debug("chameleon will be", { chameleon });
         this.players.get(chameleon)?.makeChameleon();
-        this.status = Status.PLAYING;
+        this._status = Status.PLAYING;
+    }
+
+    get board(): Board {
+        return this._board;
     }
 
     get playerIds(): string[] {
@@ -47,7 +48,7 @@ export class Game {
     }
 
     get isPlaying() {
-        return this.status === Status.PLAYING;
+        return this._status === Status.PLAYING;
     }
 
     public addPlayer(name: string) {
